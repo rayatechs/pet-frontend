@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,ts,vue}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        vazir: ['Vazirmatn', 'sans-serif'],
+      }
+    },
   },
   plugins: [],
 }
