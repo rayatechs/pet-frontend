@@ -15,9 +15,22 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
     }
   ]
 })
+
+router.beforeEach((to) => {
+  const isLoggedIn = localStorage.getItem('auth') != null
+
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    return {
+      path: '/',
+      // save the location we were at to come back later
+      // query: { redirect: to.fullPath },
+    }
+  }
+})
+
 
 export default router
