@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { useValidationStore } from '@/stores/validation'
+const validation = useValidationStore()
+
 interface Props {
     title: string,
     name: string,
@@ -19,6 +22,14 @@ const value = computed({
     emit('update:modelValue', value)
   }
 })
+
+const error = ref()
+watch(validation, (value) => {
+  const err = value.errors[props.name]
+  if (err != undefined) {
+    error.value = err
+  }
+})
 </script>
 
 <template>
@@ -30,5 +41,8 @@ const value = computed({
             :type="type" 
             :placeholder="placeholder"
             v-model="value">
+        <ul v-if="error" class="list-disc list-inside">
+          <li v-for="(err, idx) in error" :key="idx" class="text-red-900 text-xs">{{ err }}</li>
+        </ul>
     </div>
 </template>

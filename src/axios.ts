@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
+import { useValidationStore } from '@/stores/validation'
 
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:8000',
@@ -30,6 +31,11 @@ export function setupInterceptors() {
             return response
         }, 
         (error: any) => {
+            if (error.response?.status == 422) {
+                const validation = useValidationStore()
+                validation.errors = error.response.data.errors
+            }
+            
             return Promise.reject(error.response)
         })
 }
