@@ -2,13 +2,13 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
-    const token = ref(localStorage.getItem('auth'))
+    const token = ref(localStorage.getItem('token'))
 
     watch(token, (value) => {
         if (value) {
-            localStorage.setItem('auth', value)
+            localStorage.setItem('token', value)
         } else {
-            localStorage.removeItem('auth')
+            localStorage.removeItem('token')
         }
     })
 
