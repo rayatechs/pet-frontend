@@ -1,17 +1,37 @@
 <script setup lang="ts">
 import TheInput from '@/components/form/TheInput.vue';
+import { useAuthStore, type LoginForm } from '@/stores/auth';
+import { reactive } from 'vue';
+import { useRouter, RouterLink } from 'vue-router';
+
+const router = useRouter()
+const auth = useAuthStore()
+const form: LoginForm = reactive({
+    email: '',
+    password: ''
+})
+
+function send() {
+    auth.login(form).then(() => router.push('/'))
+}
 </script>
 
 <template>
-    <div class="bg-gray-100 h-full flex flex-col items-center overflow-hidden">
-        <header class="h-1/3 flex flex-col bg-gradient-to-t from-red-500 to-red-400 rounded-b-full w-[150%] text-center">
-            <h1 class="mt-36 font-semibold text-2xl text-white">ورود به حساب کاربری</h1>
+    <div class="flex flex-col items-center h-full overflow-hidden bg-gray-100">
+        <header class="h-1/3 flex flex-col justify-between items-center bg-gradient-to-t from-red-500 to-red-400 rounded-b-full w-[150%] text-center">
+            <h1 class="self-center h-full text-2xl font-semibold text-white">ورود به حساب کاربری</h1>
         </header>
 
-        <main class="flex flex-col items-center justify-center mt-10 w-full space-y-4 px-20">
-            <the-input title="شماره تلفن همراه" type="text" placeholder="09123456789" />
-            <the-input title="رمز عبور" type="password" placeholder="*********" />
-            <button class="bg-red-500 rounded-full text-white w-full py-2 hover:bg-red-700">ورود</button>
+        <main class="flex flex-col items-center justify-center w-full px-20 mt-10">
+            <the-input v-model="form.email" name="email" title="پست الکترونیک" type="text" placeholder="ali@gmai.com" />
+            <the-input v-model="form.password" name="password" title="رمز عبور" type="password" placeholder="*********" />
+            <button
+                @click.prevent="send"
+                class="w-full py-2 mt-20 text-white bg-red-500 rounded-full hover:bg-red-700">ورود</button>
+            <p class="mt-2 text-sm text-gray-400">
+                حساب کاربری ندارید؟ 
+                <router-link to="/register" class="text-gray-600">ثبت نام کنید</router-link>
+            </p>
         </main>
     </div>
 </template>

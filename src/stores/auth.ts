@@ -10,6 +10,10 @@ export interface RegisterForm {
     password: string
 }
 
+export interface LoginForm {
+    email: string,
+    password: string
+}
 
 export const useAuthStore = defineStore('auth', () => {
     const token = ref(localStorage.getItem('token'))
@@ -30,10 +34,15 @@ export const useAuthStore = defineStore('auth', () => {
                 token.value = res.data.data.token
             })
     }    
-
-    function singOut() {
-        token.value = ''
+    
+    function login(form: LoginForm) {
+        return axios.post('/api/auth/login', form)
+            .then((res) => {
+                const user = useUserStore()
+                user.info = res.data.data.user
+                token.value = res.data.data.access_token
+            })
     }
 
-    return { token, register }
+    return { token, register, login }
 })
