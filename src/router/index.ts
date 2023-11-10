@@ -7,7 +7,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/about',
@@ -16,18 +19,33 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/Auth/LoginView.vue'),
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/views/Auth/RegisterView.vue'),
     }
   ]
 })
 
 router.beforeEach((to) => {
-  const isLoggedIn = localStorage.getItem('auth') != null
+  const isLoggedIn = localStorage.getItem('token') != null
+  const authPages = ['login', 'register']
 
   if (to.meta.requiresAuth && !isLoggedIn) {
     return {
-      path: '/',
+      path: '/login',
       // save the location we were at to come back later
       // query: { redirect: to.fullPath },
+    }
+  } else if (authPages.includes(to.name) && isLoggedIn) {
+    return {
+      path: '/'
     }
   }
 })
