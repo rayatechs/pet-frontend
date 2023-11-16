@@ -26,6 +26,23 @@ const router = createRouter({
       path: '/pet/create',
       name: 'pet',
       component: () => import('@/views/Pet/CreateView.vue'),
+      children: [
+        {
+          path: 'step-1',
+          name: 'type',
+          component: () => import('@/views/Pet/Steps/TypeView.vue')
+        },
+        {
+          path: 'step-2',
+          name: 'sex',
+          component: () => import('@/views/Pet/Steps/SexView.vue')
+        },  
+        {
+          path: 'step-3',
+          name: 'info',
+          component: () => import('@/views/Pet/Steps/InfoView.vue')
+        },
+      ]
     }
   ]
 })
