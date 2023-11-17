@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IconLogout2, IconPlus, IconGenderFemale, IconGenderMale } from '@tabler/icons-vue'
-import { useRouter } from 'vue-router';
+import { useRouter, RouterLink } from 'vue-router';
 
 const router = useRouter()
 </script>
@@ -35,7 +35,7 @@ const router = useRouter()
         
         <ul class="flex flex-row items-center justify-start pb-4 overflow-x-scroll whitespace-nowrap flex-nowrap hide-scroll-bar">
           <li class="flex-none p-2 bg-white rounded-xl">
-            <a class="flex flex-col justify-center" href="">
+            <router-link to="/pet/show/1" class="flex flex-col justify-center">
               <img src="https://placehold.co/150x150" class="rounded-xl">
               
               <div class="flex flex-row items-center justify-between mt-2">
@@ -45,12 +45,13 @@ const router = useRouter()
                 </span>
               </div>
               <span class="text-xs text-gray-400">2 سال و 3 ماه</span>
-            </a>
+            </router-link>
           </li>
           
           <li class="flex-none p-2 mr-4 bg-white rounded-xl">
-            <a class="flex flex-col justify-center" href="">
+            <router-link to="/pet/show/2" class="flex flex-col justify-center">
               <img src="https://placehold.co/150x150" class="rounded-xl">
+              
               <div class="flex flex-row items-center justify-between mt-2">
                 <h4 class="text-lg font-semibold">رکسی</h4>
                 <span class="bg-red-200 rounded-full px-0.5">
@@ -58,7 +59,7 @@ const router = useRouter()
                 </span>
               </div>
               <span class="text-xs text-gray-400">2 سال و 3 ماه</span>
-            </a>
+            </router-link>
           </li>
         </ul>
       </section>
