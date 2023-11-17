@@ -62,7 +62,7 @@ router.beforeEach((to) => {
       // save the location we were at to come back later
       // query: { redirect: to.fullPath },
     }
-  } else if (authPages.includes(to.name) && isLoggedIn) {
+  } else if (authPages.includes(to.name?.toString() || '') && isLoggedIn) {
     return {
       path: '/'
     }

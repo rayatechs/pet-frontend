@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheInput from '@/components/form/TheInput.vue';
+import BaseInput from '@/components/form/BaseInput.vue';
 import { useAuthStore, type LoginForm } from '@/stores/auth';
 import { reactive } from 'vue';
 import { useRouter, RouterLink } from 'vue-router';
@@ -23,8 +23,8 @@ function send() {
         </header>
 
         <main class="flex flex-col items-center justify-center w-full px-20 mt-10">
-            <the-input v-model="form.email" name="email" title="پست الکترونیک" type="text" placeholder="ali@gmai.com" />
-            <the-input v-model="form.password" name="password" title="رمز عبور" type="password" placeholder="*********" />
+            <base-input v-model="form.email" name="email" title="پست الکترونیک" type="text" placeholder="ali@gmai.com" />
+            <base-input v-model="form.password" name="password" title="رمز عبور" type="password" placeholder="*********" />
             <button
                 @click.prevent="send"
                 class="w-full py-2 mt-20 text-white bg-red-500 rounded-full hover:bg-red-700">ورود</button>
