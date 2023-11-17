@@ -25,7 +25,8 @@ const value = computed({
 
 const error = ref()
 watch(validation, (value) => {
-  const err = value.errors[props.name]
+  const key: any = props.name
+  const err = value.errors[key]
   if (err != undefined) {
     error.value = err
   }
@@ -34,15 +35,15 @@ watch(validation, (value) => {
 
 <template>
     <div class="flex flex-col items-start justify-center w-full mt-4">
-        <label :for="name" class="text-sm font-medium mb-1">{{title}}</label>
+        <label :for="name" class="mb-1 text-sm font-medium">{{title}}</label>
         <input 
             :id="name"
-            class="rounded-lg px-4 py-2 text-sm border border-gray-200 outline-red-500 w-full" 
+            class="w-full px-4 py-2 text-sm border border-gray-200 rounded-lg outline-red-500" 
             :type="type" 
             :placeholder="placeholder"
             v-model="value">
         <ul v-if="error" class="list-disc list-inside">
-          <li v-for="(err, idx) in error" :key="idx" class="text-red-900 text-xs">{{ err }}</li>
+          <li v-for="(err, idx) in error" :key="idx" class="text-xs text-red-900">{{ err }}</li>
         </ul>
     </div>
 </template>

@@ -5,7 +5,7 @@ import axios from '@/axios'
 
 export interface RegisterForm {
     name: string,
-    email?: string,
+    email: string,
     mobile: string,
     password: string
 }
