@@ -43,6 +43,11 @@ const router = createRouter({
           component: () => import('@/views/Pet/Steps/InfoView.vue')
         },
       ]
+    },
+    {
+      path: '/pet/show/:id',
+      name: 'pet.create',
+      component: () => import('@/views/Pet/ShowView.vue')
     }
   ]
 })
