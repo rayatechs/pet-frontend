@@ -26,7 +26,7 @@ function send() {
             <base-input v-model="form.email" name="email" title="پست الکترونیک" type="text" placeholder="ali@gmai.com" />
             <base-input v-model="form.password" name="password" title="رمز عبور" type="password" placeholder="*********" />
             <button
-                @click.prevent="send"
+                @click.prevent="() => router.push('/')"
                 class="w-full py-2 mt-20 text-white bg-red-500 rounded-full hover:bg-red-700">ورود</button>
             <p class="mt-2 text-sm text-gray-400">
                 حساب کاربری ندارید؟ 
