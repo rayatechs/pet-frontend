@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconLogout2, IconPlus, IconGenderFemale, IconGenderMale } from '@tabler/icons-vue'
+import { IconMenu, IconPlus, IconGenderFemale, IconGenderMale } from '@tabler/icons-vue'
 import { useRouter, RouterLink } from 'vue-router';
 
 const router = useRouter()
@@ -7,16 +7,16 @@ const router = useRouter()
 
 <template>
   <div>
-    <header class="flex flex-row items-center justify-between p-2 bg-red-500 rounded-b-2xl">
+    <header class="fixed top-0 flex flex-row items-center justify-between w-full max-w-lg px-4 py-2 bg-red-500 rounded-b-2xl">
       <img src="https://placehold.co/40x40" class="w-10 rounded-xl">
-      <h2 class="text-xl font-medium text-white">اپلیکیشن پت</h2>
+      <h2 class="text-xl font-medium text-white">روپت</h2>
       <button class="text-sm text-white">
-        <icon-logout-2 />
+        <icon-menu />
       </button>
     </header>
 
-    <main class="px-4 space-y-10">
-      <section class="mt-10">
+    <main class="px-4 pb-6 mt-20 space-y-10">
+      <section>
         <h2 class="text-2xl">سلام حسین!</h2>
         <p class="mt-2 text-sm text-gray-500">اینجا بهت کمک می کنیم بهتر به حیوون های خونگیت برسی!</p>
       </section>

@@ -18,8 +18,10 @@ function send() {
 
 <template>
     <div class="flex flex-col items-center h-full overflow-hidden bg-gray-100">
-        <header class="h-1/3 flex flex-col justify-between items-center bg-gradient-to-t from-red-500 to-red-400 rounded-b-full w-[150%] text-center">
-            <h1 class="self-center h-full text-2xl font-semibold text-white">ورود به حساب کاربری</h1>
+        <header class="flex flex-col items-center justify-center bg-gradient-to-t from-red-500 to-red-400 rounded-b-[60%] w-full text-center">
+            <div class="my-20">
+                <h1 class="self-center h-full text-2xl font-semibold text-white">ورود به حساب کاربری</h1>
+            </div>
         </header>
 
         <main class="flex flex-col items-center justify-center w-full px-20 mt-10">
