@@ -4,45 +4,43 @@ import { useUserStore } from './user'
 import axios from '@/axios'
 
 export interface RegisterForm {
-    name: string,
-    email: string,
-    mobile: string,
-    password: string
+  name: string
+  email: string
+  mobile: string
+  password: string
 }
 
 export interface LoginForm {
-    email: string,
-    password: string
+  email: string
+  password: string
 }
 
 export const useAuthStore = defineStore('auth', () => {
-    const token = ref(localStorage.getItem('token'))
+  const token = ref(localStorage.getItem('token'))
 
-    watch(token, (value) => {
-        if (value) {
-            localStorage.setItem('token', value)
-        } else {
-            localStorage.removeItem('token')
-        }
-    })
-
-    function register(form: RegisterForm) {
-        return axios.post('/api/auth/register', form)
-            .then((res) => {
-                const user = useUserStore()
-                user.info = res.data.data.user
-                token.value = res.data.data.token
-            })
-    }    
-    
-    function login(form: LoginForm) {
-        return axios.post('/api/auth/login', form)
-            .then((res) => {
-                const user = useUserStore()
-                user.info = res.data.data.user
-                token.value = res.data.data.access_token
-            })
+  watch(token, (value) => {
+    if (value) {
+      localStorage.setItem('token', value)
+    } else {
+      localStorage.removeItem('token')
     }
+  })
 
-    return { token, register, login }
+  function register(form: RegisterForm) {
+    return axios.post('/api/auth/register', form).then((res) => {
+      const user = useUserStore()
+      user.info = res.data.data.user
+      token.value = res.data.data.token
+    })
+  }
+
+  function login(form: LoginForm) {
+    return axios.post('/api/auth/login', form).then((res) => {
+      const user = useUserStore()
+      user.info = res.data.data.user
+      token.value = res.data.data.access_token
+    })
+  }
+
+  return { token, register, login }
 })
