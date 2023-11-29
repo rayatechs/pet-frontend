@@ -20,13 +20,11 @@ function send() {
 
 <template>
     <div class="flex flex-col items-center h-full overflow-hidden bg-gray-100">
-        <header class="flex flex-col items-center justify-center bg-gradient-to-t from-red-500 to-red-400 rounded-b-[60%] w-full text-center">
-            <div class="my-20">
-                <h1 class="self-center h-full text-2xl font-semibold text-white">ساخت حساب کاربری</h1>
-            </div>
+        <header class="h-1/3 flex flex-col bg-gradient-to-t from-red-500 to-red-400 rounded-b-full w-[150%] text-center">
+            <h1 class="text-2xl font-semibold text-white mt-36">ساخت حساب کاربری</h1>
         </header>
 
-        <main class="flex flex-col items-center justify-center w-full px-20 py-10 overflow-x-scroll">
+        <main class="flex flex-col items-center justify-center w-full px-20 mt-10">
             <base-input v-model="form.name" name="name" title="نام" type="text" placeholder="علی" />
             <base-input v-model="form.email" name="email" title="پست الکترونیک" type="text" placeholder="ali@gmai.com" />
             <base-input v-model="form.mobile" name="mobile" title="شماره تلفن همراه" type="text" placeholder="09123456789" />
