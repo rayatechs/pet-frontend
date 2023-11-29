@@ -15,16 +15,16 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/Auth/LoginView.vue'),
+      component: () => import('@/views/Auth/LoginView.vue')
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/Auth/RegisterView.vue'),
+      component: () => import('@/views/Auth/RegisterView.vue')
     },
     {
       path: '/pet/create',
-      name: 'pet',
+      name: 'pet.create',
       component: () => import('@/views/Pet/CreateView.vue'),
       children: [
         {
@@ -41,12 +41,12 @@ const router = createRouter({
           path: 'step-3',
           name: 'info',
           component: () => import('@/views/Pet/Steps/InfoView.vue')
-        },
+        }
       ]
     },
     {
       path: '/pet/show/:id',
-      name: 'pet.create',
+      name: 'pet.show',
       component: () => import('@/views/Pet/ShowView.vue')
     }
   ]
@@ -58,7 +58,7 @@ router.beforeEach((to) => {
 
   if (to.meta.requiresAuth && !isLoggedIn) {
     return {
-      path: '/login',
+      path: '/login'
       // save the location we were at to come back later
       // query: { redirect: to.fullPath },
     }
@@ -68,6 +68,5 @@ router.beforeEach((to) => {
     }
   }
 })
-
 
 export default router
