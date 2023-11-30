@@ -16,6 +16,7 @@
     "@capacitor/cli": "^5.5.1",
     "@capacitor/core": "^5.5.1",
     "@capacitor/ios": "^5.5.1",
+    "@capacitor/local-notifications": "^5.0.6",
     "@tabler/icons-vue": "^2.40.0",
     "axios": "^1.6.0",
     "pinia": "^2.1.7",
