@@ -58,6 +58,14 @@ export const usePetStore = defineStore('pet', () => {
   function storeAvatar(petId: number) {
     return axios.post(`/api/pet/${petId}/upload-avatar`, { avatar: image })
   }
+  
+  function getPersianBirthdate(date: string) {
+    return new Date(date).toLocaleDateString('fa-IR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
 
-  return { all, image, type, form, resetForm, getAll, get, store, storeAvatar }
+  return { all, image, type, form, resetForm, getAll, get, store, storeAvatar, getPersianBirthdate }
 })
