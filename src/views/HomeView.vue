@@ -1,70 +1,65 @@
 <script setup lang="ts">
-import { IconMenu, IconPlus, IconGenderFemale, IconGenderMale } from '@tabler/icons-vue'
-import { useRouter, RouterLink } from 'vue-router';
+import { IconPlus, IconGenderFemale, IconGenderMale } from '@tabler/icons-vue'
+import { onMounted } from 'vue'
+import { useRouter, RouterLink } from 'vue-router'
+import { usePetStore } from '@/stores/pet'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
+const pet = usePetStore()
+const user = useUserStore()
+
+onMounted(() => {
+  pet.getAll()
+  user.show()
+})
 </script>
 
 <template>
-  <div>
-    <header class="fixed top-0 flex flex-row items-center justify-between w-full max-w-lg px-4 py-2 bg-red-500 rounded-b-2xl">
-      <img src="https://placehold.co/40x40" class="w-10 rounded-xl">
-      <h2 class="text-xl font-medium text-white">روپت</h2>
-      <button class="text-sm text-white">
-        <icon-menu />
-      </button>
-    </header>
+  <main class="px-4 mt-2 mb-20 space-y-10">
+    <section>
+      <h2 class="text-2xl text-brownie">
+        سلام <span class="font-bold text-primary">{{ user.data.name }}</span>
+      </h2>
+      <p class="mt-2 text-sm text-gray-500">اینجا بهت کمک می کنیم بهتر به حیوون های خونگیت برسی!</p>
+    </section>
 
-    <main class="px-4 pb-6 mt-20 space-y-10">
-      <section>
-        <h2 class="text-2xl">سلام حسین!</h2>
-        <p class="mt-2 text-sm text-gray-500">اینجا بهت کمک می کنیم بهتر به حیوون های خونگیت برسی!</p>
-      </section>
+    <section class="p-10 bg-primary rounded-xl">
+      <img src="/img/welcome.svg" />
+    </section>
 
-      <section class="p-10 bg-red-500 shadow-lg rounded-xl shadow-red-300">
-        <img src="/img/welcome.svg">
-      </section>
+    <section>
+      <div class="flex flex-row items-center justify-between pb-4">
+        <h3 class="text-xl text-brownie">پت های من</h3>
+        <button @click="router.push('/pet/create/step-1')" class="p-1 rounded-full bg-primary">
+          <Icon-plus class="text-white" />
+        </button>
+      </div>
 
-      <section>
-        <div class="flex flex-row items-center justify-between pb-4">
-          <h3 class="text-xl">پت های من</h3>
-          <button @click="router.push('/pet/create/step-1')" class="p-1 bg-red-500 rounded-full shadow-lg shadow-red-300">
-            <Icon-plus class="text-white" />
-          </button>
-        </div>
-        
-        <ul class="flex flex-row items-center justify-start pb-4 overflow-x-scroll whitespace-nowrap flex-nowrap hide-scroll-bar">
-          <li class="flex-none p-2 bg-white rounded-xl">
-            <router-link to="/pet/show/1" class="flex flex-col justify-center">
-              <img src="https://placehold.co/150x150" class="rounded-xl">
-              
-              <div class="flex flex-row items-center justify-between mt-2">
-                <h4 class="text-lg font-semibold">رکسی</h4>
-                <span class="bg-red-200 rounded-full px-0.5">
-                  <Icon-gender-male class="w-5 text-red-500" />
-                </span>
-              </div>
-              <span class="text-xs text-gray-400">2 سال و 3 ماه</span>
-            </router-link>
-          </li>
-          
-          <li class="flex-none p-2 mr-4 bg-white rounded-xl">
-            <router-link to="/pet/show/2" class="flex flex-col justify-center">
-              <img src="https://placehold.co/150x150" class="rounded-xl">
-              
-              <div class="flex flex-row items-center justify-between mt-2">
-                <h4 class="text-lg font-semibold">رکسی</h4>
-                <span class="bg-red-200 rounded-full px-0.5">
-                  <Icon-gender-female class="w-5 text-red-500" />
-                </span>
-              </div>
-              <span class="text-xs text-gray-400">2 سال و 3 ماه</span>
-            </router-link>
-          </li>
-        </ul>
-      </section>
-    </main>
-  </div>
+      <ul
+        class="flex flex-row items-center justify-start pb-4 overflow-x-scroll whitespace-nowrap flex-nowrap hide-scroll-bar"
+      >
+        <li
+          v-for="(p, idx) in pet.all"
+          :key="idx"
+          class="flex-none p-2 mx-1 bg-milk-100 rounded-2xl"
+        >
+          <router-link :to="`/pet/show/${p.id}`" class="flex flex-col justify-center">
+            <img :src="p.avatar ?? '/img/placeholder.jpg'" class="rounded-xl" />
+
+            <div class="flex flex-row items-center justify-between mt-2">
+              <h4 class="text-lg font-semibold">{{ p.name }}</h4>
+              <span class="bg-red-200 rounded-full px-0.5">
+                <Icon-gender-male v-if="p.sex == 'male'" class="w-5 text-primary" />
+                <Icon-gender-female v-else class="w-5 text-primary" />
+              </span>
+            </div>
+            <span class="text-xs text-gray-400">{{ pet.getPersianBirthdate(p.birthdate) }}</span>
+          </router-link>
+        </li>
+      </ul>
+    </section>
+  </main>
 </template>
 
 <style scoped>
