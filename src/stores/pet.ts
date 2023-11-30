@@ -43,10 +43,6 @@ export const usePetStore = defineStore('pet', () => {
     image = new File([''], '')
   }
 
-  function store() {
-    return axios.post('/api/pet', form)
-  }
-
   function getAll() {
     return axios.get('/api/pet').then((res) => (all.value = res.data.data))
   }
@@ -55,9 +51,13 @@ export const usePetStore = defineStore('pet', () => {
     return axios.get(`/api/pet/${id}`)
   }
 
+  function store() {
+    return axios.post('/api/pet', form)
+  }
+
   function storeAvatar(petId: number) {
     return axios.post(`/api/pet/${petId}/upload-avatar`, { avatar: image })
   }
 
-  return { all, image, type, form, resetForm, store, getAll, get, storeAvatar }
+  return { all, image, type, form, resetForm, getAll, get, store, storeAvatar }
 })
