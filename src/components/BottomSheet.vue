@@ -41,7 +41,7 @@ function close() {
         </main>
 
         <footer class="w-full p-4">
-          <slot name="footer" />
+          <slot name="footer" :close="close" />
         </footer>
       </div>
     </Transition>

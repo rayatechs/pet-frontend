@@ -8,7 +8,8 @@ const router = useRouter()
 
 function back() {
   emit('onBack')
-  router.push('/home')
+  
+  router.push('/')
 }
 </script>
 

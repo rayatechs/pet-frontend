@@ -20,7 +20,7 @@ const value = computed({
     return props.modelValue
   },
   set(value) {
-    emit('update:modelValue', value.replaceAll('/', '-'))
+    emit('update:modelValue', value.replace(/\//g, "-"))
   }
 })
 
