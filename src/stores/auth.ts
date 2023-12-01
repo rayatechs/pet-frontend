@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
   function register(form: RegisterForm) {
     return axios.post('/api/auth/register', form).then((res) => {
       const user = useUserStore()
-      user.info = res.data.data.user
+      user.data = res.data.data.user
       token.value = res.data.data.token
     })
   }
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
   function login(form: LoginForm) {
     return axios.post('/api/auth/login', form).then((res) => {
       const user = useUserStore()
-      user.info = res.data.data.user
+      user.data = res.data.data.user
       token.value = res.data.data.access_token
     })
   }

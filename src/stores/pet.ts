@@ -26,7 +26,6 @@ interface Form {
 
 export const usePetStore = defineStore('pet', () => {
   const all: Ref<Pet[]> = ref([])
-  let image: File = new File([''], '')
   const type = ref('')
   const initial: Form = {
     id: 0,
@@ -40,7 +39,6 @@ export const usePetStore = defineStore('pet', () => {
   function resetForm() {
     Object.assign(form, initial)
     type.value = ''
-    image = new File([''], '')
   }
 
   function getAll() {
@@ -55,8 +53,12 @@ export const usePetStore = defineStore('pet', () => {
     return axios.post('/api/pet', form)
   }
 
-  function storeAvatar(petId: number) {
-    return axios.post(`/api/pet/${petId}/upload-avatar`, { avatar: image })
+  function storeAvatar(petId: number, avatar: File) {
+    return axios.post(`/api/pet/${petId}/upload-avatar`, { avatar }, { 
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
   
   function getPersianBirthdate(date: string) {
@@ -67,5 +69,5 @@ export const usePetStore = defineStore('pet', () => {
     })
   }
 
-  return { all, image, type, form, resetForm, getAll, get, store, storeAvatar, getPersianBirthdate }
+  return { all, type, form, resetForm, getAll, get, store, storeAvatar, getPersianBirthdate }
 })

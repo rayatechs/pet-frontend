@@ -2,29 +2,20 @@
 import { IconX } from '@tabler/icons-vue'
 import { ref } from 'vue'
 
-interface Props {
-  onOpen?: Function
-  onClose?: Function
-}
-
-const props = defineProps<Props>()
+const emit = defineEmits(['onOpen', 'onClose'])
 
 const visibility = ref(false)
 
 function open() {
   visibility.value = true
 
-  if (props.onOpen) {
-    props.onOpen()
-  }
+  emit('onOpen')
 }
 
 function close() {
   visibility.value = false
 
-  if (props.onClose) {
-    props.onClose()
-  }
+  emit('onClose')
 }
 </script>
 
@@ -50,7 +41,7 @@ function close() {
         </main>
 
         <footer class="w-full p-4">
-          <slot name="footer" />
+          <slot name="footer" :close="close" />
         </footer>
       </div>
     </Transition>
