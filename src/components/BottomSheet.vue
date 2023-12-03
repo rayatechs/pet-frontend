@@ -22,7 +22,7 @@ function close() {
 <template>
   <slot name="trigger" :open="open" />
 
-  <Teleport to="#layout">
+  <Teleport to="#app">
     <Transition name="slide-fade">
       <div
         v-if="visibility"
