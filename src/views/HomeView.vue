@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="px-4 mt-2 mb-20 space-y-10">
+  <main class="px-4 pb-20 mt-2 space-y-10">
     <section>
       <h2 class="text-2xl text-brownie">
         سلام <span class="font-bold text-primary">{{ user.data.name }}</span>

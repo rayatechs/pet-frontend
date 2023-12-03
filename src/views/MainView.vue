@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col h-full min-h-0">
     <header class="flex flex-row items-center justify-between w-full max-w-lg p-4">
       <button class="text-sm">
         <icon-menu />
@@ -16,13 +16,13 @@ import { RouterLink } from 'vue-router'
       </div>
     </header>
 
-    <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }" class="flex-grow min-h-0 overflow-y-scroll">
       <transition name="slide">
         <component :is="Component" />
       </transition>
     </router-view>
 
-    <div class="fixed left-0 right-0 z-50 mx-auto w-fit bottom-4">
+    <div class="absolute left-0 right-0 z-50 mx-auto w-fit bottom-4">
       <div class="flex items-center justify-between h-16 px-2 shadow rounded-2xl bg-milk-100">
         <router-link
           to="/home"
